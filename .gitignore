@@ -1,1 +1,4 @@
-Logs/
+Logs/automation.log
+automation.log
+/*.log
+*.log
