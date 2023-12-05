@@ -13,6 +13,7 @@ class LoginPage:
         self.driver = driver
 
     def setUserName(self, username):
+        self.driver.find_element(By.ID, self.textbox_username_id).clear() # another command to use
         self.element = WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located(locator=self.textbox_username))
         self.element.clear()
         #self.driver.find_element(By.ID, self.textbox_username_id).clear() #older version with No wait
