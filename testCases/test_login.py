@@ -24,7 +24,7 @@ class Test_001_Login:
         else:
             assert False
 
-    def test_login_func(self, setup):
+    def test_login(self, setup):
         self.logger.info("************* Test_001_Login **************")
         self.logger.info("************* Verify Login Test **************")
         self.driver = setup
@@ -34,16 +34,36 @@ class Test_001_Login:
         self.loginpage.setPassword(self.password)
         self.loginpage.clickLogin()
         adminpageTitle = self.driver.title
-        #self.driver.close()
+        self.driver.close()
         if adminpageTitle == "Dashboard / nopCommerce administration":
             assert True
             self.logger.info("************* Login Test Pass **************")
+            #self.driver.close()
         else:
             self.driver.save_screenshot("Screenshots/test_login_func.png")
             self.logger.error("************* Login Test Failed **************")
             self.driver.close()
             assert False
 
+    def test_logout(self, setup):
+        self.logger.info("************* Test_001_Login **************")
+        self.logger.info("************* Verify Logout Test **************")
+        self.driver = setup
+        self.driver.get(self.baseURL)
+        self.loginpage = pageObjects.LoginPage(self.driver) # create an object for LoginPage Class
+        self.loginpage.setUserName(self.username)
+        self.loginpage.setPassword(self.password)
+        self.loginpage.clickLogin()
+        self.loginpage.clickLogout()
+        homePageTitle = self.driver.title
+        self.driver.close()
+        if homePageTitle == "Your store. Login":
+            assert True
+            self.logger.info("************* Logout Test Pass **************")
+        else:
+            self.driver.save_screenshot("Screenshots/test_logout_func.png")
+            self.logger.error("************* Logout Test Failed **************")
+            assert False
 
 
 
